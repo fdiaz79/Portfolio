@@ -1,0 +1,75 @@
+body {
+    background-image: url(../images/kb-background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #9cc589;
+}
+
+.navbar {
+    background-color: #585858;
+}
+
+.nav-item .nav-link {
+    color: #9cc589 !important;
+    font-size: 18px;
+    font-weight: bold;   
+}
+
+.nav-link:hover {
+    color: #69acb5 !important;
+    font-weight: bolder !important;
+}
+
+.active .nav-link {
+    color: #d2e673 !important;
+}
+
+.dropdown-menu {
+    background-color: #585858;
+    border-color: whitesmoke;
+}
+
+.dropdown-item {
+    color: #9cc589;
+    font-weight: bolder;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    color: #69acb5 !important;
+    font-weight: bolder !important;
+}
+
+.logo-nav {
+    height: 45px;
+}
+
+.jumbotron {
+    background: none;
+    min-height: 500px;
+    padding: 18% 5% 18% 5%;
+}
+
+#wd-title {
+    font-weight: bolder;
+}
+
+#wd-paragraph {
+    padding: 5%;
+}
+
+.first-letter {
+    /* color: #69acb5; */
+    font-size: 76px;
+}
+
+.footer {
+    /* background-color: #585858; */
+    font-weight: bolder;
+    color: #69acb5;
+    position: fixed;
+    bottom: 0px;
+    text-align: center;
+    height: 42px;
+}
