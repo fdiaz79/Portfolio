@@ -7,6 +7,13 @@ body {
     color: #9cc589;
 }
 
+hr {
+    height: 1px;
+    color: #585858;
+    background-color: #585858;
+    border: none;
+}
+
 .navbar {
     background-color: #585858;
 }
@@ -45,7 +52,7 @@ body {
     height: 45px;
 }
 
-.jumbotron {
+.index-jumbotron {
     background: none;
     min-height: 500px;
     padding: 18% 5% 18% 5%;
@@ -61,15 +68,81 @@ body {
 
 .first-letter {
     /* color: #69acb5; */
-    font-size: 76px;
+    font-size: 200%;
 }
 
 .footer {
     /* background-color: #585858; */
     font-weight: bolder;
     color: #69acb5;
-    position: fixed;
-    bottom: 0px;
+    /* position: fixed;
+    bottom: 0px; */
     text-align: center;
     height: 42px;
+}
+
+.about-jumbotron, .portfolio-jumbotron, .contact-jumbotron {
+    background: none;
+    min-height: 500px;
+    padding: 8% 5% 8% 5%;
+}
+
+#about-card {
+    max-width: 700px;
+    margin: auto;
+    background: none;
+    padding: 1%;
+    border: 1px #585858 solid;    
+}
+
+#img-profile {
+    max-height: 200px;
+    max-width: 190px;
+    margin: auto;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.green-button {
+    font-weight: bold;
+    border: 2px #9cc589 solid;
+    color: #9cc589;
+}
+
+.img-cont {
+    padding: 0px;
+    margin: 0px;
+    border: 1px #585858 solid;
+}
+.portfolio-img {
+    width: 100%; 
+    /* max-height: 100%; */
+    margin: auto;
+}
+
+div.desc {
+    background-color: #585858;
+    bottom: 40%;
+    color: #d2e673;
+    font-weight: bold;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    transition: 1s ease;
+    opacity: 0;
+}
+
+.img-cont:hover .desc{
+    opacity: 1;
+
+}
+
+
+.fix{
+    width: 100%;
+    padding: 0px;
 }
