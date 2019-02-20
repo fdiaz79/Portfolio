@@ -46,6 +46,23 @@ $(document).ready(function() {
         }
     });
 
+    // showing contact us messages dinamically 
+    // var navMessage = $("#nav-message");
+    // function renderMessages(document) {
+    //     var divAccordion = $("<div>");
+    //     divAccordion.attr("id","accordion");
+
+
+    // };
+
+    // contactDB.on("value", function(snapshot) {
+    //     snapshot.forEach((contact) => {
+    //         var contactData = contact.val();
+    //         renderMessages(contactData);
+    //     });
+    // });
+
+
     // sending projects info to database
 
     $("#project-submit").on("click", function(event) {
@@ -68,23 +85,40 @@ $(document).ready(function() {
     });
 
     // showing projects on portfolio
-    // projectsDB.on("child_added", function (projectAdded) {
-    //     console.log(projectAdded.val());
-    // });
-    // if (window.location.pathname == "../portfolio.html") {
-    //     console.log("PORTFOLIO PAGE LOADED!!");
-    // };
     if ($("body.portfolio-body").length > 0){
         console.log("PORTFOLIO PAGE LOADED!!");
-        var projectsContent = $("#project-content");
+        var projectsContent = $("#projects-content");
         
         function renderPortfolio(document) {
-            
+            var anchorTag = $("<a>");
+            anchorTag.addClass("col-4 col-md-3 col-lg-2 img-cont");
+            anchorTag.attr("href", document.link);
+            anchorTag.attr("target", "_blank");
+
+            var imageTag = $("<img>");
+            imageTag.addClass("img-responsive portfolio-img");
+            imageTag.attr("src", "assets/images/" + document.image);
+            imageTag.attr("alt", document.name);
+
+            var divTag = $("<div>");
+            divTag.addClass("desc");
+
+            var pTag = $("<p>");
+            pTag.addClass("desc_content");
+            pTag.text(document.name);
+
+            divTag.append(pTag);
+            anchorTag.append(imageTag);
+            anchorTag.append(divTag);
+
+            projectsContent.append(anchorTag);
+            console.log(document.link);
         };
 
         projectsDB.on("value", function (snapshot) {
             snapshot.forEach((doc) => {
                 var projectsData = doc.val();
+                
                 renderPortfolio(projectsData);
                 
             });
