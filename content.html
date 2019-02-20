@@ -116,7 +116,70 @@
                 <!-- Main content of the page -->
                 <div class="container">
                     <div class="jumbotron content-jumbotron">
-                        
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-message-tab" data-toggle="tab" href="#nav-message" role="tab" aria-controls="nav-message" aria-selected="true">
+                                    Message Center
+                                </a>
+                                <a class="nav-item nav-link" id="nav-manager-tab" data-toggle="tab" href="#nav-manager" role="tab" aria-controls="nav-manager" aria-selected="false">
+                                    Content manager
+                                </a>
+                            </div>
+                        </nav>
+
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-message" role="tabpanel" aria-labelledby="nav-message-tab">
+                                
+                                <div id="accordion">
+                                    <div class="card">
+                                        <div class="card-header" id="message-name">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                    Name of the Messenger
+                                                </button>
+                                            </h5>
+                                        </div>                                    
+                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <p id="message-mail">Messenger email</p>
+                                                <p id="message-body">Message content</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+        
+                            <div class="tab-pane fade" id="nav-manager" role="tabpanel" aria-labelledby="nav-manager-tab">
+                                <div class="card">
+                                    <h5 class="card-header">Add Projects to the Portfolio</h5>
+                                    <div class="card-body" id="add-card" >
+                                        <form id="project-form">
+                                            <div class="form-group row">
+                                                <label for="project-name" class="col-sm-2 col-form-label col-form-label-sm">Project Name:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" required class="form-control form-control-sm" id="project-name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="project-link" class="col-sm-2 col-form-label col-form-label-sm">Project url:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" required class="form-control form-control-sm" id="project-link" >
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="project-image" class="col-sm-2 col-form-label col-form-label-sm">Project image file:</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" required class="form-control form-control-sm" id="project-image" >
+                                                </div>
+                                            </div>                                            
+                                            <button type="submit" class="btn btn-outline-success float-right green-button" id="project-submit">Submit</button>        
+                                        </form>
+                                    </div>
+                                </div>                                               
+                            </div>
+
+                        </div>
                                 
                     </div>
                 </div>

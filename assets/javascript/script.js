@@ -12,7 +12,7 @@ $(document).ready(function() {
     firebase.initializeApp(config);
 
     var contactDB = firebase.database().ref("contactDB");
-    var usersDB = firebase.database().ref("usersDB");
+    var projectsDB = firebase.database().ref("projectsDB");
 
     // capturing contact information
 
@@ -46,37 +46,83 @@ $(document).ready(function() {
         }
     });
 
-    $("#sup-button").on("click", function(event) {
+    // sending projects info to database
+
+    $("#project-submit").on("click", function(event) {
         event.preventDefault();
+        
+        var projectName = $("#project-name").val().trim().toUpperCase();
+        var projectLink = $("#project-link").val().trim();
+        var projectImage = $("#project-image").val().trim();
 
-        // validate input fields
-        // var formValidation = $("form")[0];
-        // var validator =formValidation.checkValidity();
-        // formValidation.reportValidity();
-        var validator=true;
-        if (validator) {
-            var signName = $("#sign-name").val().trim();
-            var signMail = $("#sign-email").val();
-            var signPassword = $("#sign-password").val().trim();
-            console.log(signName);
-            console.log(signMail);
-            console.log(signPassword);
-
-            var newUserObj = {
-                name : signName,
-                email : signMail,
-                password : signPassword
-            }
-
-            usersDB.push(newUserObj);
-
-            $("#sign-name").val("");
-            $("#sign-mail").val("");
-            $("#sign-password").val("");
-        } else{
-            return false;
+        var newProjectObj = {
+            name : projectName,
+            link : projectLink,
+            image : projectImage
         }
-
+        projectsDB.push(newProjectObj);
+        
+        $("#project-name").val("");
+        $("#project-link").val("");
+        $("#project-image").val("");
     });
+
+    // showing projects on portfolio
+    // projectsDB.on("child_added", function (projectAdded) {
+    //     console.log(projectAdded.val());
+    // });
+    // if (window.location.pathname == "../portfolio.html") {
+    //     console.log("PORTFOLIO PAGE LOADED!!");
+    // };
+    if ($("body.portfolio-body").length > 0){
+        console.log("PORTFOLIO PAGE LOADED!!");
+        var projectsContent = $("#project-content");
+        
+        function renderPortfolio(document) {
+            
+        };
+
+        projectsDB.on("value", function (snapshot) {
+            snapshot.forEach((doc) => {
+                var projectsData = doc.val();
+                renderPortfolio(projectsData);
+                
+            });
+            // console.log(snapshot.val());
+        });
+    }
+
+    // $("#sup-button").on("click", function(event) {
+    //     event.preventDefault();
+
+    //     // validate input fields
+    //     // var formValidation = $("form")[0];
+    //     // var validator =formValidation.checkValidity();
+    //     // formValidation.reportValidity();
+    //     var validator=true;
+    //     if (validator) {
+    //         var signName = $("#sign-name").val().trim();
+    //         var signMail = $("#sign-email").val();
+    //         var signPassword = $("#sign-password").val().trim();
+    //         console.log(signName);
+    //         console.log(signMail);
+    //         console.log(signPassword);
+
+    //         var newUserObj = {
+    //             name : signName,
+    //             email : signMail,
+    //             password : signPassword
+    //         }
+
+    //         usersDB.push(newUserObj);
+
+    //         $("#sign-name").val("");
+    //         $("#sign-mail").val("");
+    //         $("#sign-password").val("");
+    //     } else{
+    //         return false;
+    //     }
+
+    // });
 
 });
