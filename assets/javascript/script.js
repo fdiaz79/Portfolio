@@ -28,11 +28,13 @@ $(document).ready(function() {
             var contactName = $("#contact-name").val().trim();
             var contactEmail = $("#contact-email").val().trim();
             var contactMessage = $("#contact-message").val().trim();
+            var dateMessage = moment().format("MM/DD/YYYY");
 
             var newContactObj = {
                 name : contactName,
                 email : contactEmail,
-                message : contactMessage
+                message : contactMessage,
+                date: dateMessage
             };
 
             contactDB.push(newContactObj);
@@ -46,21 +48,69 @@ $(document).ready(function() {
         }
     });
 
-    // showing contact us messages dinamically 
-    // var navMessage = $("#nav-message");
-    // function renderMessages(document) {
-    //     var divAccordion = $("<div>");
-    //     divAccordion.attr("id","accordion");
+    // showing contact us messages dinamically from DB
+    var navMessage = $("#nav-message");
+
+    function renderMessages(document) {
+        var divAccordion = $("<div>");
+        divAccordion.attr("id","accordion");
+
+        var divCard = $("<div>");
+        divCard.addClass("card");
+
+        var divCardHeader = $("<div>");
+        divCardHeader.addClass("card-header");
+        divCardHeader.attr("id", "message-name");
+
+        accordionTitle = $("<h5>");
+        accordionTitle.addClass("mb-0");
+
+        var btnCollapse = $("<button>");
+        btnCollapse.addClass("btn btn-link collapsed");
+        btnCollapse.attr("data-toggle", "collapse");
+        btnCollapse.attr("data-target", "#collapseOne");
+        btnCollapse.attr("aria-expanded", "false");
+        btnCollapse.attr("aria-controls", "collapseOne");
+        btnCollapse.text(document.name + " on " + document.date);
+
+        accordionTitle.append(btnCollapse);
+        divCardHeader.append(accordionTitle);
+        divCard.append(divCardHeader);
 
 
-    // };
+        var divCollapse = $("<div>");
+        divCollapse.addClass("collapse");
+        divCollapse.attr("id", "collapseOne");
+        divCollapse.attr("aria-labelledby", "headingOne");
+        divCollapse.attr("data-parent","#accordion");
 
-    // contactDB.on("value", function(snapshot) {
-    //     snapshot.forEach((contact) => {
-    //         var contactData = contact.val();
-    //         renderMessages(contactData);
-    //     });
-    // });
+        var divCardBody = $("<div>");
+        divCardBody.addClass("card-body");
+
+        var pMessMail = $("<p>");
+        pMessMail.attr("message-mail");
+        pMessMail.text("contact email: " + document.email);
+
+        var pMessBody = $("<p>");
+        pMessMail.attr("message-body");
+        pMessBody.text(document.message);
+
+        divCardBody.append(pMessMail);
+        divCardBody.append(pMessBody);
+        divCollapse.append(divCardBody);
+        divCard.append(divCollapse);
+
+        divAccordion.append(divCard);
+
+        navMessage.append(divAccordion);
+    };
+
+    contactDB.on("value", function(snapshot) {
+        snapshot.forEach((contact) => {
+            var contactData = contact.val();
+            renderMessages(contactData);
+        });
+    });
 
 
     // sending projects info to database
@@ -84,9 +134,11 @@ $(document).ready(function() {
         $("#project-image").val("");
     });
 
-    // showing projects on portfolio
+    
+    // When PORTFOLIO PAGE IS LOADED
     if ($("body.portfolio-body").length > 0){
-        console.log("PORTFOLIO PAGE LOADED!!");
+        
+        // showing projects on portfolio from DB
         var projectsContent = $("#projects-content");
         
         function renderPortfolio(document) {
