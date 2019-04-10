@@ -113,7 +113,7 @@ hr {
 }
 
 .img-cont {
-    padding: 0px;
+    padding: 2px;
     margin: 0px;
     border: 1px #585858 solid;
 }
@@ -130,7 +130,7 @@ div.desc {
     font-weight: bold;
     font-size: 12px;
     left: 0;
-    opacity: 0.5;
+    /* opacity: 0.5; */
     position: absolute;
     width: 100%;
     text-align: center;
@@ -138,7 +138,20 @@ div.desc {
     opacity: 0;
 }
 
-.img-cont:hover .desc{
+.hub-link {
+    bottom: 5%;
+    right: 0;
+    /* opacity: 0.5; */
+    position: absolute;
+    color: #d2e673;
+    width: 100%;
+    text-align: right;
+    transition: 1s ease;
+    opacity: 0;
+    margin-right: 10px;
+}
+
+.img-cont:hover .desc, .hub-link{
     opacity: 1;
 
 }

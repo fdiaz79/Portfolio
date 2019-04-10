@@ -166,17 +166,20 @@ $(document).ready(function() {
         var projectName = $("#project-name").val().trim().toUpperCase();
         var projectLink = $("#project-link").val().trim();
         var projectImage = $("#project-image").val().trim();
+        var projectHub = $("#project-hub").val().trim();
 
         var newProjectObj = {
             name : projectName,
             link : projectLink,
-            image : projectImage
+            image : projectImage,
+            hub : projectHub
         }
         projectsDB.push(newProjectObj);
         
         $("#project-name").val("");
         $("#project-link").val("");
         $("#project-image").val("");
+        $("#project-hub").val("");
     });
 
     
@@ -188,7 +191,7 @@ $(document).ready(function() {
         
         function renderPortfolio(document) {
             var anchorTag = $("<a>");
-            anchorTag.addClass("col-4 col-md-3 col-lg-2 img-cont");
+            anchorTag.addClass("col-6 col-md-4 col-lg-3 img-cont");
             anchorTag.attr("href", document.link);
             anchorTag.attr("target", "_blank");
 
@@ -204,9 +207,18 @@ $(document).ready(function() {
             pTag.addClass("desc_content");
             pTag.text(document.name);
 
+            var anchorIcon = $("<a>");
+            anchorIcon.attr("href", document.hub);
+            anchorIcon.attr("target", "_blank");
+            var hubTag = $("<i>");
+            hubTag.addClass("fab fa-github fa-2x hub-link");
+
+
             divTag.append(pTag);
+            anchorIcon.append(hubTag);
             anchorTag.append(imageTag);
             anchorTag.append(divTag);
+            anchorTag.append(anchorIcon);
 
             projectsContent.append(anchorTag);
             console.log(document.link);
