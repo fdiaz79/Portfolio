@@ -1,6 +1,7 @@
 body {
     background-image: url(../images/kb-background.jpg);
     background-size: cover;
+    /* background-attachment: fixed; */
     background-repeat: no-repeat;
     background-position: top;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -142,8 +143,26 @@ div.desc {
 
 }
 
-
 .fix{
     width: 100%;
     padding: 0px;
+}
+
+#nav-message-tab, #nav-manager-tab, #message-name, #projects-header{
+    color: #69acb5;
+    font-weight: bold;
+}
+
+#message-body, #message-mail, #name-label, #url-label, #file-label {
+    color: #69acb5;
+}
+
+#message-mail {
+    font-style: italic;
+    font-size: smaller;
+}
+
+#btn-collapse {
+    color: #69acb5;
+
 }

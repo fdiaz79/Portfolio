@@ -13,6 +13,48 @@ $(document).ready(function() {
 
     var contactDB = firebase.database().ref("contactDB");
     var projectsDB = firebase.database().ref("projectsDB");
+    var auth = firebase.auth();
+    var usersDB= firebase.database().ref("usersDB");
+    var functions = firebase.functions(); 
+
+
+    // Sign up process
+    var signupForm = $("#signup-form");
+    $("#sup-button").on("click", (e) => {
+        e.preventDefault();
+
+        // get signup form fields values
+        var supName = $("#sign-name").val();
+        var supEmail = $("#sign-email").val();        
+        var supPass = $("#sign-password").val();
+        var supError = $("#sign-error");
+
+        //sign up the user
+        //cred has access to the id property
+        auth.createUserWithEmailAndPassword(supEmail, supPass).then(cred => {
+            // return because we want to break the function and attach a then to avoid nesting thens
+            // firebase creates the users collection (if doesn't exist) 
+            //.doc creates a reference document with the uid that provides the credential
+            // to create the same id in the collection users and relate the collection with the authentication user credential
+            // .set passes an object to create the properties for the id in the collection
+            return usersDB.collection('users').doc(cred.user.uid).set ({
+                name: supName
+            });
+        }).then(() => { //this function is fired when the new user collection is set
+            // const modal = document.querySelector('#modal-signup');
+            // M.Modal.getInstance(modal).close();
+            signupForm.reset();
+            supError.innerHTML = '';
+        }).catch(err => {
+            supError.innerHTML = err.message;
+    });
+
+
+
+    })
+
+    
+
 
     // capturing contact information
 
@@ -51,7 +93,7 @@ $(document).ready(function() {
     // showing contact us messages dinamically from DB
     var navMessage = $("#nav-message");
 
-    function renderMessages(document) {
+    function renderMessages(document, count) {
         var divAccordion = $("<div>");
         divAccordion.attr("id","accordion");
 
@@ -60,18 +102,19 @@ $(document).ready(function() {
 
         var divCardHeader = $("<div>");
         divCardHeader.addClass("card-header");
-        divCardHeader.attr("id", "message-name");
+        divCardHeader.attr("id", "message-name"+count);
 
         accordionTitle = $("<h5>");
         accordionTitle.addClass("mb-0");
 
         var btnCollapse = $("<button>");
         btnCollapse.addClass("btn btn-link collapsed");
+        btnCollapse.attr("id","btn-collapse");
         btnCollapse.attr("data-toggle", "collapse");
-        btnCollapse.attr("data-target", "#collapseOne");
+        btnCollapse.attr("data-target", "#collapse"+count);
         btnCollapse.attr("aria-expanded", "false");
-        btnCollapse.attr("aria-controls", "collapseOne");
-        btnCollapse.text(document.name + " on " + document.date);
+        btnCollapse.attr("aria-controls", "collapse"+count);
+        btnCollapse.text("On " + document.date + " " + document.name + " wrote: ");
 
         accordionTitle.append(btnCollapse);
         divCardHeader.append(accordionTitle);
@@ -80,23 +123,23 @@ $(document).ready(function() {
 
         var divCollapse = $("<div>");
         divCollapse.addClass("collapse");
-        divCollapse.attr("id", "collapseOne");
-        divCollapse.attr("aria-labelledby", "headingOne");
+        divCollapse.attr("id", "collapse"+count);
+        divCollapse.attr("aria-labelledby", "message-name"+count);
         divCollapse.attr("data-parent","#accordion");
 
         var divCardBody = $("<div>");
         divCardBody.addClass("card-body");
-
+       
         var pMessMail = $("<p>");
-        pMessMail.attr("message-mail");
-        pMessMail.text("contact email: " + document.email);
+        pMessMail.attr("id", "message-mail");
+        pMessMail.text("From: " + document.email);
 
         var pMessBody = $("<p>");
-        pMessMail.attr("message-body");
+        pMessBody.attr("id", "message-body");
         pMessBody.text(document.message);
 
-        divCardBody.append(pMessMail);
         divCardBody.append(pMessBody);
+        divCardBody.append(pMessMail);        
         divCollapse.append(divCardBody);
         divCard.append(divCollapse);
 
@@ -106,9 +149,11 @@ $(document).ready(function() {
     };
 
     contactDB.on("value", function(snapshot) {
+        var contactCount = 1;
         snapshot.forEach((contact) => {
             var contactData = contact.val();
-            renderMessages(contactData);
+            renderMessages(contactData, contactCount);
+            contactCount++;
         });
     });
 
