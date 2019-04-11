@@ -73,9 +73,9 @@ hr {
 }
 
 .footer {
-    background-color: #585858;
+    /* background-color: #585858; */
     font-weight: bolder;
-    color: #69acb5;
+    
     /* position: fixed;
     bottom: 0px; */
     text-align: center;
