@@ -1,3 +1,4 @@
 # Portfolio
-Definitive version of my portfolio
-Stalck me here... https://fdiaz79.github.io/Portfolio/
+Definitive version of my portfolio.
+
+Stalk me here... https://fdiaz79.github.io/Portfolio/
